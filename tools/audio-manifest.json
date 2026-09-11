@@ -1,0 +1,26 @@
+{
+  "_comment": "Narration lines mirrored from src/book.ts (TITLE_CARD + PAGES[].text/.secondaryText) and the count words from PRD §4.3/§5. Keep this in sync by hand if book.ts changes — it's a thin data copy, not the source of truth.",
+  "narration": [
+    { "id": "00", "zh": "小兔过万圣节", "en": "Little Rabbit's Halloween" },
+    { "id": "01", "zh": "万圣节到了！小兔好想去要糖。", "en": "It's Halloween! Little Rabbit is excited to go trick-or-treat." },
+    { "id": "02", "zh": "小兔要穿南瓜装！", "en": "Little Rabbit's costume is a pumpkin!" },
+    { "id": "03", "zh": "小兔穿上南瓜装。", "en": "Little Rabbit puts it on." },
+    { "id": "04", "zh": "小兔准备好去要糖了。", "en": "Little Rabbit is ready to go trick-or-treat." },
+    { "id": "05", "zh": "小兔去敲猫叔叔的门。不给糖就捣蛋！", "en": "Little Rabbit knocks on Mr. Cat's door. Trick or treat!" },
+    { "id": "06", "zh": "猫叔叔给小兔一张贴纸。", "en": "Mr. Cat gives Little Rabbit one sticker." },
+    { "id": "07", "zh": "小兔去敲熊阿姨的门。不给糖就捣蛋！", "en": "Little Rabbit knocks on Ms. Bear's door. Trick or treat!" },
+    { "id": "08", "zh": "熊阿姨给小兔两张贴纸。", "en": "Ms. Bear gives Little Rabbit two stickers." },
+    { "id": "09", "zh": "最后一扇门啦！不给糖就捣蛋！", "en": "One last door! Trick or treat!" },
+    { "id": "10", "zh": "猫头鹰姐姐给小兔三张贴纸。", "en": "Miss Owl gives Little Rabbit three stickers." },
+    { "id": "11", "zh": "我们来数一数小兔有多少张贴纸吧。", "en": "Let's count how many stickers Little Rabbit has." },
+    { "id": "12", "zh": "小兔玩得很开心，现在该睡觉了。晚安！", "en": "Little Rabbit enjoyed Halloween, but now it's time to sleep. Good night!" }
+  ],
+  "count": [
+    { "id": "1", "zh": "一", "en": "one" },
+    { "id": "2", "zh": "二", "en": "two" },
+    { "id": "3", "zh": "三", "en": "three" },
+    { "id": "4", "zh": "四", "en": "four" },
+    { "id": "5", "zh": "五", "en": "five" },
+    { "id": "6", "zh": "六", "en": "six" }
+  ]
+}
