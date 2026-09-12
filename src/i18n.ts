@@ -1,8 +1,8 @@
 import type { Language, LocalizedText } from "./types";
 
 export const LANGUAGES: Language[] = ["zh", "en"];
-// PRD §4.1 says the product default is "zh"; temporarily "en" for testing.
-export const DEFAULT_LANGUAGE: Language = "en";
+// PRD §4.1: the product default is "zh".
+export const DEFAULT_LANGUAGE: Language = "zh";
 
 /** Spoken number words for the counting page (PRD §5, page 11). */
 export const NUMBER_WORDS: Record<Language, string[]> = {

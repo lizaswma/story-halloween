@@ -29,15 +29,18 @@ npm run preview     # serve the build (PWA/service worker active here, not in de
 | `src/components/TitleCard.tsx` | Series-branded opening card |
 | `public/pages`, `public/audio`, `public/sfx` | Drop-in assets — see the README in each folder |
 
-Art and audio are not in the repo yet. The app runs without them: missing images
-render as labelled placeholder boxes, missing audio is silent (milestone M0).
+Real art and bilingual narration/SFX are in place for all 12 pages + title card
+(missing-asset fallback still applies if anything is ever pulled: placeholder
+boxes for images, silent for audio).
+
+Live at [halloween.mamabuilds.dev](https://halloween.mamabuilds.dev).
 
 ## Status
 
-- [x] M0 — scaffold (this)
-- [ ] M1 — Mandarin content + TTS narration + SFX
-- [ ] M2 — real scene art
-- [ ] M3 — English text + narration + toggle polish
+- [x] M0 — scaffold
+- [x] M1 — Mandarin content + narration + SFX
+- [x] M2 — real scene art
+- [x] M3 — English text + narration + toggle polish
 - [ ] M4 — final LLM-generated voices
-- [ ] M5 — PWA polish + iPad install
+- [x] M5 — PWA polish + iPad install
 - [ ] M6 — toddler playtest
