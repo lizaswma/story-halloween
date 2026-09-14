@@ -3,7 +3,7 @@
 **Status:** Scope decided — ready to scaffold
 **Product:** Interactive storybook web app, book #1 in a planned holiday series featuring 小兔 (Little Rabbit)
 **Primary user:** A 2–3 year old, co-playing with a parent
-**Author/owner:** liza.ma@gmail.com
+**Author/owner:** liza@mamabuilds.dev
 
 ---
 
