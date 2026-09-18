@@ -19,7 +19,12 @@ export function PageView({ page }: { page: Page }) {
   const extras = page.extras ?? [];
 
   const [opened, setOpened] = useState(false);
-  const [glowing, setGlowing] = useState(false);
+  // A counter, not a bool: the costume glow replays on every tap rather than
+  // once per page visit, and each new value forces the CSS animations to
+  // restart (see the effect below and the sparkle-burst `key`).
+  const [glowBurst, setGlowBurst] = useState(0);
+  const glowing = glowBurst > 0;
+  const pageRef = useRef<HTMLDivElement>(null);
   const [twinkling, setTwinkling] = useState(false);
   const [stuck, setStuck] = useState(0);
   // Easter eggs mid-reaction (extra layer id → true); cleared on a timer so the
@@ -40,6 +45,18 @@ export function PageView({ page }: { page: Page }) {
     },
     [],
   );
+
+  // React reuses the DOM node across bursts since the className string is
+  // unchanged once glowing (both before and after re-adding "is-glowing"), so
+  // a remove → reflow → re-add is needed to make the CSS animation restart.
+  useEffect(() => {
+    if (glowBurst === 0) return;
+    const el = pageRef.current;
+    if (!el) return;
+    el.classList.remove("is-glowing");
+    void el.offsetWidth;
+    el.classList.add("is-glowing");
+  }, [glowBurst]);
 
   // Narration auto-plays on page turn and whenever the language changes (PRD §4.1).
   useEffect(() => {
@@ -67,7 +84,7 @@ export function PageView({ page }: { page: Page }) {
         setOpened(true);
         break;
       case "glow":
-        setGlowing(true);
+        setGlowBurst((n) => n + 1);
         break;
       case "twinkle":
         setTwinkling(true);
@@ -110,6 +127,7 @@ export function PageView({ page }: { page: Page }) {
 
   return (
     <div
+      ref={pageRef}
       className={`page ${pageGlowing ? "is-glowing" : ""}`}
       data-open={opened || undefined}
     >
@@ -128,6 +146,7 @@ export function PageView({ page }: { page: Page }) {
           starburst gives the tap an unmistakable, localized event. */}
       {pageGlowing && (
         <div
+          key={glowBurst}
           className="sparkle-burst"
           style={{
             left: `${it.hotspot.x + it.hotspot.w / 2}%`,
