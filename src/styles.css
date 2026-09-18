@@ -191,6 +191,51 @@ body {
   100% { opacity: 0.5; }
 }
 
+/* Localized starburst — the discrete "event" a whole-scene tone shift can't
+   provide on its own (page 3, PRD §6 "no dead taps"). */
+.sparkle-burst {
+  position: absolute;
+  z-index: 4;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.sparkle-arm {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sparkle-burst .sparkle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fff9e6 0%,
+    #ffd873 55%,
+    rgba(255, 216, 115, 0) 75%
+  );
+  opacity: 0;
+  animation: sparkle-fly 900ms ease-out both;
+}
+@keyframes sparkle-fly {
+  0% {
+    opacity: 0;
+    transform: translateX(0) scale(0.3);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(70px) scale(1);
+  }
+}
+
 .is-twinkling {
   animation: twinkle 1s ease-in-out infinite alternate;
 }

@@ -124,6 +124,35 @@ export function PageView({ page }: { page: Page }) {
         return <Layer key={l.id} asset={l} className={layerClass(l.id)} />;
       })}
 
+      {/* A whole-scene tone shift alone reads as "nothing happened" — this
+          starburst gives the tap an unmistakable, localized event. */}
+      {pageGlowing && (
+        <div
+          className="sparkle-burst"
+          style={{
+            left: `${it.hotspot.x + it.hotspot.w / 2}%`,
+            top: `${it.hotspot.y + it.hotspot.h / 2}%`,
+          }}
+        >
+          {Array.from({ length: 8 }).map((_, i) => (
+            // Rotation is a static inline transform on this wrapper, not part
+            // of the animated keyframes: Chrome fails to interpolate a
+            // transform whose rotate() reads a CSS custom property, freezing
+            // the animation on its first frame.
+            <span
+              key={i}
+              className="sparkle-arm"
+              style={{ transform: `rotate(${i * 45}deg)` }}
+            >
+              <span
+                className="sparkle"
+                style={{ animationDelay: `${i * 35}ms` }}
+              />
+            </span>
+          ))}
+        </div>
+      )}
+
       {/* Easter-egg "reacted" frames: a full-frame variant of the plate cross-faded
           in for a moment on tap (PRD §6 "no dead taps"). */}
       {extras.map((x) => (
