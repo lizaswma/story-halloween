@@ -268,7 +268,7 @@ export const PAGES: Page[] = [
       hotspot: { x: 24, y: 76, w: 54, h: 20 }, // the row of six stickers on the floor
     },
     extras: [
-      { flash: "window-bright", sfx: "chime", hotspot: { x: 72, y: 0, w: 26, h: 36 } }, // window + moon, top-right
+      { flash: "window-bright", sfx: "chime", hotspot: { x: 55, y: 0, w: 23, h: 42 } }, // window + moon, top-right
       { flash: "lamp-flare", sfx: "flare", hotspot: { x: 20, y: 22, w: 16, h: 42 } }, // lamp on the stool, left
       { flash: "ghost-stretch", sfx: "yawn", hotspot: { x: 70, y: 58, w: 20, h: 28 } }, // sleeping ghost, right of 小兔
     ],
