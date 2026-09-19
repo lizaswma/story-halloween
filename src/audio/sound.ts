@@ -19,10 +19,12 @@ export function isMuted() {
   return muted;
 }
 
-function load(src: string): Howl {
+// Narration streams via HTML5 audio; short SFX use Web Audio for tap-latency and
+// so rapid re-taps overlap instead of restarting.
+function load(src: string, html5 = true): Howl {
   let howl = cache.get(src);
   if (!howl) {
-    howl = new Howl({ src: [src], preload: true, html5: true });
+    howl = new Howl({ src: [src], preload: true, html5 });
     howl.on("loaderror", () => {
       /* placeholder assets not present yet — silent */
     });
@@ -31,17 +33,17 @@ function load(src: string): Howl {
   return howl;
 }
 
-function safePlay(src: string) {
+function safePlay(src: string, html5 = true) {
   if (muted) return;
   try {
-    load(src).play();
+    load(src, html5).play();
   } catch {
     /* ignore */
   }
 }
 
 export function playSfx(name: string) {
-  safePlay(sfxSrc(name));
+  safePlay(sfxSrc(name), false);
 }
 
 export function stopNarration() {
