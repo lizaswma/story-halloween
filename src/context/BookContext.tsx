@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useState,
 } from "react";
 import type { ReactNode } from "react";
 import { DEFAULT_LANGUAGE } from "../i18n";
@@ -30,6 +31,12 @@ type BookState = {
   /** Show the on-page sentence (for the parent). Default on; narration still plays when off. */
   showText: boolean;
   setShowText: (s: boolean) => void;
+
+  /** Sticker sets already handed over (keyed by their sprite ids), so the page
+   *  after a door page doesn't ask for the same stickers again. Resets on restart. */
+  given: ReadonlySet<string>;
+  markGiven: (key: string) => void;
+  unmarkGiven: (key: string) => void;
 };
 
 const Ctx = createContext<BookState | null>(null);
@@ -50,6 +57,24 @@ export function BookProvider({ children }: { children: ReactNode }) {
   );
   const [pageIndex, setPageIndex] = usePersistentState<number>("lr.page", 0);
 
+  const [given, setGiven] = useState<ReadonlySet<string>>(() => new Set());
+  const markGiven = useCallback(
+    (key: string) =>
+      setGiven((g) => (g.has(key) ? g : new Set(g).add(key))),
+    [],
+  );
+
+  const unmarkGiven = useCallback(
+    (key: string) =>
+      setGiven((g) => {
+        if (!g.has(key)) return g;
+        const next = new Set(g);
+        next.delete(key);
+        return next;
+      }),
+    [],
+  );
+
   // Keep the audio engine in sync with persisted mute state.
   useEffect(() => {
     applyMuted(muted);
@@ -67,7 +92,10 @@ export function BookProvider({ children }: { children: ReactNode }) {
     () => setPageIndex((p) => Math.max(0, p - 1)),
     [setPageIndex],
   );
-  const restart = useCallback(() => setPageIndex(0), [setPageIndex]);
+  const restart = useCallback(() => {
+    setPageIndex(0);
+    setGiven(new Set());
+  }, [setPageIndex]);
 
   const setLanguage = useCallback(
     (l: Language) => setLanguageRaw(l),
@@ -92,6 +120,9 @@ export function BookProvider({ children }: { children: ReactNode }) {
       setMuted: setMutedRaw,
       showText,
       setShowText: setShowTextRaw,
+      given,
+      markGiven,
+      unmarkGiven,
     }),
     [
       language,
@@ -106,6 +137,9 @@ export function BookProvider({ children }: { children: ReactNode }) {
       setMutedRaw,
       showText,
       setShowTextRaw,
+      given,
+      markGiven,
+      unmarkGiven,
     ],
   );
 

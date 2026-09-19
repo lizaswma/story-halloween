@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
+// `process` is only read for the PORT variable; declared here so the config type-checks without @types/node.
+declare const process: { env: Record<string, string | undefined> };
+
 // See PRD.md §3 (tech stack) and §4 (bilingual).
 export default defineConfig({
   plugins: [
@@ -46,6 +49,6 @@ export default defineConfig({
       devOptions: { enabled: false },
     }),
   ],
-  server: { port: 5173, host: true },
+  server: { port: Number(process.env.PORT) || 5173, host: true },
   preview: { port: 4173 },
 });
